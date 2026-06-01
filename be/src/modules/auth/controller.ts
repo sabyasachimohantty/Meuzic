@@ -1,15 +1,16 @@
 import type { Request, Response } from "express";
-import { signupUser } from "./service.js";
+import { loginUser, signupUser } from "./service.js";
 
 async function signupController(req: Request, res: Response) {
     try {
         const { username, email, password } = req.body;
 
         // Signup user
-        signupUser(username, email, password)
+        const user = await signupUser(username, email, password);
 
         res.status(201).json({
-            message: "User created successfully"
+            message: "User created successfully",
+            user
         });
     } catch (error: any) {
         res.status(error.status).json({
@@ -19,7 +20,19 @@ async function signupController(req: Request, res: Response) {
 }
 
 async function loginController(req: Request, res: Response) {
-    
+    try {
+        const { email, password } = req.body;
+        const authTokens = await loginUser(email, password);
+        res.status(200).json({
+            refreshToken: authTokens.refresh_token,
+            accessToken: authTokens.access_token,
+            message: "Logged in successfully"
+        })
+    } catch (error) {
+        res.status(401).json({
+            message: "Login failed"
+        })
+    }
 }
 
 async function refreshController(req: Request, res: Response) {
