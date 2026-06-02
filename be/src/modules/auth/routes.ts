@@ -7,7 +7,7 @@ router.post("/signup", signupController);
 
 router.post("/login", loginController);
 
-router.post("/refresh", refreshController);
+router.get("/refresh", refreshController);
 
 router.get("/logout", logoutController);
 

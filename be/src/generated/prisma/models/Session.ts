@@ -243,16 +243,16 @@ export type SessionOrderByWithRelationInput = {
 
 export type SessionWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  refresh_token?: string
   AND?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   OR?: Prisma.SessionWhereInput[]
   NOT?: Prisma.SessionWhereInput | Prisma.SessionWhereInput[]
   userid?: Prisma.IntFilter<"Session"> | number
-  refresh_token?: Prisma.StringFilter<"Session"> | string
   expires_at?: Prisma.DateTimeFilter<"Session"> | Date | string
   revoked?: Prisma.BoolFilter<"Session"> | boolean
   created_at?: Prisma.DateTimeFilter<"Session"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "refresh_token">
 
 export type SessionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

@@ -58,8 +58,57 @@ async function loginUser(email: string, password: string)  {
     }
 }
 
-async function refreshToken() {
+async function refreshAccessToken(refreshToken: string) {
+    try {
+        const session = await prisma.session.findUnique({
+            where: {
+                refresh_token: refreshToken
+            }
+        })
 
+        const currentTime = new Date();
+
+        if(!session) {
+            throw new Error("Invalid token")
+        }
+
+        if(session.revoked || currentTime.getTime() > session.expires_at.getTime()) {
+            throw new Error("Token expired")
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: session.userid
+            }
+        })
+
+        if(!user) {
+            throw new Error("The token user does not exist")
+        }
+
+        const newAccessToken = genrateAccessToken(user.email);
+        const newRefreshToken = generateRefreshToken();
+
+        const newExpiresAt = new Date(Date.now() + REFRESH_TOKEN_EXPIRY_TIME);
+
+        await prisma.session.update({
+            where: {
+                id: session.id
+            },
+            data: {
+                refresh_token: newRefreshToken,
+                expires_at: newExpiresAt
+            }
+        })
+
+        return {
+            newRefreshToken,
+            newAccessToken
+        }
+        
+    } catch (error) {
+        throw error
+    }
 }
 
 async function logoutUser() {
@@ -69,6 +118,6 @@ async function logoutUser() {
 export {
     signupUser,
     loginUser,
-    refreshToken,
+    refreshAccessToken,
     logoutUser
 };
