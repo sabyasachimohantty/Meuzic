@@ -391,7 +391,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Session: 'Session'
+  Session: 'Session',
+  Song: 'Song'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session"
+    modelProps: "user" | "session" | "song"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -559,6 +560,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Song: {
+      payload: Prisma.$SongPayload<ExtArgs>
+      fields: Prisma.SongFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SongFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SongFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        findFirst: {
+          args: Prisma.SongFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SongFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        findMany: {
+          args: Prisma.SongFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>[]
+        }
+        create: {
+          args: Prisma.SongCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        createMany: {
+          args: Prisma.SongCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SongCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>[]
+        }
+        delete: {
+          args: Prisma.SongDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        update: {
+          args: Prisma.SongUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        deleteMany: {
+          args: Prisma.SongDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SongUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SongUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>[]
+        }
+        upsert: {
+          args: Prisma.SongUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SongPayload>
+        }
+        aggregate: {
+          args: Prisma.SongAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSong>
+        }
+        groupBy: {
+          args: Prisma.SongGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SongGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SongCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SongCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -618,6 +693,21 @@ export const SessionScalarFieldEnum = {
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const SongScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  artistid: 'artistid',
+  audio_url: 'audio_url',
+  cover_url: 'cover_url',
+  duration: 'duration',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SongScalarFieldEnum = (typeof SongScalarFieldEnum)[keyof typeof SongScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -793,6 +883,7 @@ export interface PrismaClientOptions {
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   session?: Prisma.SessionOmit
+  song?: Prisma.SongOmit
 }
 
 /* Types for Logging */

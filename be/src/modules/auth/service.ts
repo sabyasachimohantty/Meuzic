@@ -111,8 +111,16 @@ async function refreshAccessToken(refreshToken: string) {
     }
 }
 
-async function logoutUser() {
-
+async function logoutUser(refreshToken: string) {
+    try {
+        await prisma.session.delete({
+            where: {
+                refresh_token: refreshToken
+            }
+        })
+    } catch (error) {
+        throw error
+    }
 }
 
 export {

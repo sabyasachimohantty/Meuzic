@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { loginUser, refreshAccessToken, signupUser } from "./service.js";
+import { loginUser, logoutUser, refreshAccessToken, signupUser } from "./service.js";
 import { REFRESH_TOKEN_EXPIRY_TIME } from "./constants.js";
 import dotenv from 'dotenv';
 
@@ -79,16 +79,24 @@ async function refreshController(req: Request, res: Response) {
 }
 
 async function logoutController(req: Request, res: Response) {
-    res.clearCookie('refresh_token', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax'
-    })
-
-    res.status(200).json({
-        success: true,
-        message: "Logged out successfully"
-    })
+    try {
+        const refreshToken = req.cookies.refresh_token
+    
+        await logoutUser(refreshToken);
+    
+        res.clearCookie('refresh_token', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax'
+        })
+    
+        res.status(200).json({
+            success: true,
+            message: "Logged out successfully"
+        })
+    } catch (error) {
+        throw new Error("Logout failed")
+    }
 }
 
 export {

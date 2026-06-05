@@ -209,6 +209,7 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   sessions?: Prisma.SessionListRelationFilter
+  songs?: Prisma.SongListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -217,6 +218,7 @@ export type UserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
+  songs?: Prisma.SongOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -228,6 +230,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   username?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   sessions?: Prisma.SessionListRelationFilter
+  songs?: Prisma.SongListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -257,6 +260,7 @@ export type UserCreateInput = {
   email: string
   password: string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  songs?: Prisma.SongCreateNestedManyWithoutArtistInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -265,6 +269,7 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  songs?: Prisma.SongUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type UserUpdateInput = {
@@ -272,6 +277,7 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  songs?: Prisma.SongUpdateManyWithoutArtistNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -280,6 +286,7 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  songs?: Prisma.SongUncheckedUpdateManyWithoutArtistNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -362,10 +369,25 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutSongsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSongsInput, Prisma.UserUncheckedCreateWithoutSongsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSongsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSongsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSongsInput, Prisma.UserUncheckedCreateWithoutSongsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSongsInput
+  upsert?: Prisma.UserUpsertWithoutSongsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSongsInput, Prisma.UserUpdateWithoutSongsInput>, Prisma.UserUncheckedUpdateWithoutSongsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   username: string
   email: string
   password: string
+  songs?: Prisma.SongCreateNestedManyWithoutArtistInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -373,6 +395,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   username: string
   email: string
   password: string
+  songs?: Prisma.SongUncheckedCreateNestedManyWithoutArtistInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -395,6 +418,7 @@ export type UserUpdateWithoutSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  songs?: Prisma.SongUpdateManyWithoutArtistNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -402,6 +426,53 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  songs?: Prisma.SongUncheckedUpdateManyWithoutArtistNestedInput
+}
+
+export type UserCreateWithoutSongsInput = {
+  username: string
+  email: string
+  password: string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSongsInput = {
+  id?: number
+  username: string
+  email: string
+  password: string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSongsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSongsInput, Prisma.UserUncheckedCreateWithoutSongsInput>
+}
+
+export type UserUpsertWithoutSongsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSongsInput, Prisma.UserUncheckedUpdateWithoutSongsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSongsInput, Prisma.UserUncheckedCreateWithoutSongsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSongsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSongsInput, Prisma.UserUncheckedUpdateWithoutSongsInput>
+}
+
+export type UserUpdateWithoutSongsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSongsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -411,10 +482,12 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
 
 export type UserCountOutputType = {
   sessions: number
+  songs: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  songs?: boolean | UserCountOutputTypeCountSongsArgs
 }
 
 /**
@@ -434,6 +507,13 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.SessionWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSongsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SongWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -441,6 +521,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email?: boolean
   password?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  songs?: boolean | Prisma.User$songsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -468,6 +549,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "email" | "password", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  songs?: boolean | Prisma.User$songsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -477,6 +559,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
+    songs: Prisma.$SongPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -878,6 +961,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  songs<T extends Prisma.User$songsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$songsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SongPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1320,6 +1404,30 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
+}
+
+/**
+ * User.songs
+ */
+export type User$songsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Song
+   */
+  select?: Prisma.SongSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Song
+   */
+  omit?: Prisma.SongOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SongInclude<ExtArgs> | null
+  where?: Prisma.SongWhereInput
+  orderBy?: Prisma.SongOrderByWithRelationInput | Prisma.SongOrderByWithRelationInput[]
+  cursor?: Prisma.SongWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SongScalarFieldEnum | Prisma.SongScalarFieldEnum[]
 }
 
 /**

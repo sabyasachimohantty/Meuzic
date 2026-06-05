@@ -54,3 +54,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Session = Prisma.SessionModel
+/**
+ * Model Song
+ * 
+ */
+export type Song = Prisma.SongModel

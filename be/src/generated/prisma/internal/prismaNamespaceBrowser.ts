@@ -50,7 +50,8 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Session: 'Session'
+  Session: 'Session',
+  Song: 'Song'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -89,6 +90,21 @@ export const SessionScalarFieldEnum = {
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const SongScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  artistid: 'artistid',
+  audio_url: 'audio_url',
+  cover_url: 'cover_url',
+  duration: 'duration',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SongScalarFieldEnum = (typeof SongScalarFieldEnum)[keyof typeof SongScalarFieldEnum]
 
 
 export const SortOrder = {

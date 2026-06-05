@@ -20,6 +20,7 @@ model User {
   email    String    @unique
   password String
   sessions Session[]
+  songs    Song[]
 }
 
 model Session {
@@ -30,4 +31,17 @@ model Session {
   expires_at    DateTime
   revoked       Boolean  @default(false)
   created_at    DateTime @default(now())
+}
+
+model Song {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  artist      User     @relation(fields: [artistid], references: [id])
+  artistid    Int
+  audio_url   String
+  cover_url   String
+  duration    Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
 }
