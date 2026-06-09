@@ -1,8 +1,9 @@
 import { Router } from "express";
+import { getSongsController } from "./controller";
 
 const router = Router();
 
-router.get("/songs");
+router.get("/songs", getSongsController);
 
 router.post("/songs");
 
